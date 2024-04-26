@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BG.Server.Configuration;
+using BG.Server.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace BG.Server.Controllers
 {
@@ -7,41 +10,25 @@ namespace BG.Server.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private static List<Game> games = new List<Game>
+        private readonly MongoDbContext _context;
+
+        public GameController(IOptions<MongoConfiguration> configuration)
         {
-            new Game
-            {
-                Id = new Guid(),
-                Title = "Спящие боги",
-                Description = "Игра спящие логи описание",
-                ImageUrl = "https://hobbygames.ru/image/cache/hobbygames_beta/data/Lavka_Games/Spyashie_Bogi/spyashye_bogi-1024x1024-wm.JPG",
-                MaxPlayers = 2,
-                Price = 3000
-            },
-            new Game
-            {
-                Id = new Guid(),
-                Title = "Ужас Аркхэма",
-                Description = "Ужас Аркхэма описание",
-                ImageUrl = "https://hobbygames.ru/image/cache/hobbygames_beta/data/HobbyWorld/Arkham_Horror/3rd_edition/AH_3ed_box_3D_roznica-1024x1024-wm.jpg",
-                MaxPlayers = 4,
-                Price = 6000
-            },
-            new Game
-            {
-                Id = new Guid(),
-                Title = "Манчкин",
-                Description = "Бей друзей Бери Сокровища",
-                ImageUrl = "https://hobbygames.ru/image/cache/hobbygames_beta/data/HobbyWorld/Munchkin/Munchkin/Munchkin00-1024x1024-wm.jpg",
-                MaxPlayers = 2,
-                Price = 1000
-            }
-        };
+            _context = new MongoDbContext(configuration);
+        }
 
         [HttpGet]
-        public async Task<ActionResult<List<Game>>> GetGames()
+        public async Task<ActionResult<IEnumerable<Game>>> Get()
         {
+            var games = await _context.GetGamesCollection.Find(item => true).ToListAsync();
             return Ok(games);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Game game)
+        {
+            await _context.GetGamesCollection.InsertOneAsync(game);
+            return CreatedAtAction("Get", new { id = game.Id }, game);
         }
     }
 }

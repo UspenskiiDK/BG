@@ -2,7 +2,7 @@
 {
     public class Game
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; } = String.Empty;
         public string Title { get; set; } = String.Empty;
         public string Description { get; set; } = String.Empty;
         public string ImageUrl { get; set; } = String.Empty;

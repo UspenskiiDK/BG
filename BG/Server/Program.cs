@@ -1,4 +1,5 @@
 global using BG.Shared;
+using BG.Server.Configuration;
 using Microsoft.AspNetCore.ResponseCompression;
 
 namespace BG
@@ -16,6 +17,7 @@ namespace BG
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.Configure<MongoConfiguration>(builder.Configuration.GetSection("MongoConfiguration"));
 
             var app = builder.Build();
 
