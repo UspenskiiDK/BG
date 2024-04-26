@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BG.Server", "BG\Server\BG.Server.csproj", "{7FC2A871-978A-4E51-9B0A-901B4AE135E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BG.Client", "BG\Client\BG.Client.csproj", "{8F133D3E-0A8B-40E7-B15D-05EF2C5B58C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BG.Shared", "BG\Shared\BG.Shared.csproj", "{9E888DD2-3DAE-4A2B-970E-76528981B9DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FC2A871-978A-4E51-9B0A-901B4AE135E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC2A871-978A-4E51-9B0A-901B4AE135E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC2A871-978A-4E51-9B0A-901B4AE135E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC2A871-978A-4E51-9B0A-901B4AE135E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F133D3E-0A8B-40E7-B15D-05EF2C5B58C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F133D3E-0A8B-40E7-B15D-05EF2C5B58C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F133D3E-0A8B-40E7-B15D-05EF2C5B58C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F133D3E-0A8B-40E7-B15D-05EF2C5B58C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E888DD2-3DAE-4A2B-970E-76528981B9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E888DD2-3DAE-4A2B-970E-76528981B9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E888DD2-3DAE-4A2B-970E-76528981B9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E888DD2-3DAE-4A2B-970E-76528981B9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B2F4FDE-6807-4C19-A8FF-464DA2AAC4B3}
+	EndGlobalSection
+EndGlobal
