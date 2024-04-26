@@ -1,37 +1,38 @@
-﻿@inject HttpClient httpClient
+﻿@inject IGameService _gameService
 
-<ul class="list-unstyled">
-    @foreach (var game in games)
-    {
-        <li class="media my-3">
-            <div class="media-img-wrapper mr-2">
-                <a href="#">
-                    <img class="media-img" src="@game.ImageUrl" alt="@game.Title" />
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="#">
-                    <h4 class="mb-0">@game.Title</h4>
-                </a>
-                <p>@game.Description</p>
-                <p>Максимум игроков: @game.MaxPlayers</p>
-                <h5 class="price">
-                    @game.Price ₽
-                </h5>
-            </div>
-        </li>
-    }
-</ul>
+@if (_gameService.Games != null)
+{
+    <ul class="list-unstyled">
+        @foreach (var game in _gameService.Games)
+        {
+            <li class="media my-3">
+                <div class="media-img-wrapper mr-2">
+                    <a href="#">
+                        <img class="media-img" src="@game.ImageUrl" alt="@game.Title" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a href="#">
+                        <h4 class="mb-0">@game.Title</h4>
+                    </a>
+                    <p>@game.Description</p>
+                    <p>Максимум игроков: @game.MaxPlayers</p>
+                    <h5 class="price">
+                        @game.Price ₽
+                    </h5>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <span>Игр не найдено. Приходите в следующий раз!</span>
+}
 
 @code {
-    private static List<Game> games = new List<Game>();
-
     protected override async Task OnInitializedAsync()
     {
-        var response = await httpClient.GetFromJsonAsync<List<Game>>("api/Game");
-        if (response != null)
-        {
-            games = response;
-        }
+        await _gameService.GetGames();
     }
 }

@@ -1,5 +1,7 @@
 global using BG.Shared;
 using BG.Server.Configuration;
+using BG.Server.Services.GameService;
+using BG.Server.Services.GameService.Interfaces;
 using Microsoft.AspNetCore.ResponseCompression;
 
 namespace BG
@@ -18,6 +20,8 @@ namespace BG
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.Configure<MongoConfiguration>(builder.Configuration.GetSection("MongoConfiguration"));
+
+            builder.Services.AddScoped<IGameService, GameService>();
 
             var app = builder.Build();
 

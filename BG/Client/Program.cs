@@ -1,4 +1,6 @@
 using BG.Client;
+using BG.Client.Services.GameService;
+using BG.Client.Services.GameService.Interfaces;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -13,6 +15,7 @@ namespace BG.Client
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddScoped<IGameService, GameService>();
 
             await builder.Build().RunAsync();
         }
