@@ -13,12 +13,21 @@ namespace BG.Client.Services.GameService
             _httpClient = httpClient;
         }
 
-        public IEnumerable<Game> Games { get; set; } = new List<Game>();
+        public List<Game> Games { get; set; } = new List<Game>();
+        public Game Game { get; set; } = new Game();
+
+        public async Task<ServiceResponse<Game>> GetGame(string id)
+        {
+            var response =
+                await _httpClient.GetFromJsonAsync<ServiceResponse<Game>>($"api/Game/{id}");
+
+            return response;
+        }
 
         public async Task GetGames()
         {
             var response = 
-                await _httpClient.GetFromJsonAsync<ServiceResponse<IEnumerable<Game>>>("api/Game");
+                await _httpClient.GetFromJsonAsync<ServiceResponse<List<Game>>>("api/Game");
 
             if (response?.Data != null)
             {

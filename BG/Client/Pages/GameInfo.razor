@@ -1,0 +1,45 @@
+﻿@page "/game/{id}"
+@inject IGameService _gameService
+
+@if (game != null)
+{
+    <div class="media">
+        <div class="media-img-wrapper mr-2">
+            <img class="media-img" src="@game.ImageUrl" alt="@game.Title"/>
+        </div>
+        <div class="media-body">
+            <h2 class="mb-0">@game.Title</h2>
+            <p>@game.Description</p>
+            <p>Максимум игроков: @game.MaxPlayers</p>
+            <h4 class="price">
+                @game.Price ₽
+            </h4>
+        </div>
+    </div>
+}
+else
+{
+    <span>@message</span>
+}
+
+@code {
+    private Game? game = null;
+    private string message = string.Empty;
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        message = "Загружаем информацию по игре";
+
+        var response = await _gameService.GetGame(Id);
+        if (!response.Success)
+        {
+            message = response.Message;
+        }
+        else{
+            game = response.Data;
+        }
+    }
+}

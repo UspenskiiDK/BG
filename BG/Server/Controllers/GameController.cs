@@ -1,10 +1,5 @@
-﻿using BG.Server.Configuration;
-using BG.Server.Data;
-using BG.Server.Services.GameService.Interfaces;
+﻿using BG.Server.Services.GameService.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using System.Collections;
 
 namespace BG.Server.Controllers
 {
@@ -20,10 +15,18 @@ namespace BG.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Game>>>> Get()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<Game>>>> GetGames()
         {
             var response = await _gameService.GetGamesAsync();
             
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Game>> GetGame(string id)
+        {
+            var response = await _gameService.GetGameAsync(id);
+
             return Ok(response);
         }
 
@@ -32,19 +35,6 @@ namespace BG.Server.Controllers
         //{
         //    await _context.GetGamesCollection.InsertOneAsync(game);
         //    return CreatedAtAction("Get", new { id = game.Id }, game);
-        //}
-
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Game>> Get(string id)
-        //{
-        //    var game = await _context.GetGamesCollection.Find(item => item.Id == id).FirstOrDefaultAsync();
-
-        //    if (game == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(game);
         //}
 
         //[HttpPut("{id}")]
